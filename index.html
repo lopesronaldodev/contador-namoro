@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title❤️ Ronaldo & Juliana – Amor Eterno</title>
+  <title>❤️ Ronaldo & Juliana – Amor Eterno</title>
   <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Open+Sans:wght@400;700&display=swap" rel="stylesheet">
   <style>
     body {
@@ -77,6 +77,20 @@
     audio {
       display: none;
     }
+
+    .player-button {
+      position: fixed;
+      bottom: 20px;
+      background: rgba(0, 0, 0, 0.6);
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 25px;
+      font-size: 1em;
+      cursor: pointer;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+      z-index: 10;
+    }
   </style>
 </head>
 <body>
@@ -88,8 +102,11 @@
     <div class="coracoes">❤️ 💖 💕 💘 💞</div>
   </main>
 
+  <!-- Botão para tocar música -->
+  <button class="player-button" id="playMusic">▶️ Tocar Música</button>
+
   <!-- Música de fundo -->
-  <audio id="bg-music" autoplay loop>
+  <audio id="bg-music" loop muted>
     <source src="RÜFÜS DU SOL - Innerbloom [W10Vof1acps].mp3" type="audio/mpeg">
     Seu navegador não suporta áudio HTML5.
   </audio>
@@ -112,19 +129,16 @@
     setInterval(atualizarContador, 1000);
     atualizarContador();
 
-    document.body.addEventListener('click', function () {
+    document.getElementById('playMusic').addEventListener('click', function () {
       const audio = document.getElementById('bg-music');
-      if (audio.paused) {
-        audio.play().catch(() => {
-          console.log("Interação do usuário necessária para tocar áudio.");
-        });
-      }
-    }, { once: true });
+      audio.muted = false;
+      audio.play().then(() => {
+        document.getElementById('playMusic').style.display = 'none';
+      }).catch(() => {
+        alert('Clique novamente para permitir a reprodução da música.');
+      });
+    });
   </script>
 </body>
 </html>
 
-  
-  </script>
-</body>
-</html>
